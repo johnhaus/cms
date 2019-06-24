@@ -1,5 +1,8 @@
 class SubjectsController < ApplicationController
   def index
+    @subjects = Subject.sorted
+    render('index') # this is not needed, but to display something
+    # other than 'index', this can override defaults.
   end
 
   def show
@@ -23,5 +26,4 @@ class SubjectsController < ApplicationController
   def destroy
   end
 
-  end
 end
