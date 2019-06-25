@@ -10,6 +10,7 @@ class SubjectsController < ApplicationController
   end
 
   def new
+    @subject = Subject.new({:name => 'Default'}) #Puts "Default" as default value on the form.
   end
 
   def create
