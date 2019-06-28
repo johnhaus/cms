@@ -14,6 +14,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :sections do
+    member do
+      get :delete
+    end
+  end
+
   get 'cms/index'
   get 'cms/hello'
   get 'cms/other_hello'
