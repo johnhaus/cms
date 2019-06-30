@@ -1,5 +1,7 @@
 class PagesController < ApplicationController
 
+  layout 'admin' # replaces application.html.erb
+
   def index
     @pages = Page.sorted # will sort by position, can use Page.all as well
   end

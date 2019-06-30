@@ -1,4 +1,7 @@
 class SubjectsController < ApplicationController
+
+  layout 'admin' # replaces application.html.erb
+
   def index
     @subjects = Subject.sorted
     render('index') # this is not needed, but to display something
