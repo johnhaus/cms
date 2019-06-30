@@ -1,5 +1,7 @@
 class SectionsController < ApplicationController
 
+  layout 'admin' # replaces application.html.erb
+
   def index
     @sections = Section.sorted
   end
