@@ -1,4 +1,7 @@
 class CmsController < ApplicationController
+
+  layout 'application'
+
   def index
     # can get rails to render something other than default by providing render plus
     # the view to render- so could switch index and hello and would swap what is rendered
