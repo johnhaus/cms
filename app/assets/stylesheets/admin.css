@@ -12,5 +12,7 @@
  *
  * require_tree .
  *= require primary
+ *= require admin_additions
  *= require_self
  */
+
