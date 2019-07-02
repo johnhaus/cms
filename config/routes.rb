@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  root 'cms#index'
+  root :to => 'public#index'
+
+  get 'show/:permalink', :to => 'public/show'
 
   # Controller generated for login/password
   get 'access/menu'
