@@ -30,7 +30,7 @@ class AdminUsersController < ApplicationController
     @admin_user = AdminUser.find(params[:id])
     if @admin_user.update_attributes(admin_user_params)
       flash[:notice] = "Admin User updated successfully"
-      redirect_to(admin_users_path
+      redirect_to(admin_users_path)
     else
       render('edit')
     end
@@ -50,7 +50,7 @@ class AdminUsersController < ApplicationController
   private
 
   def admin_user_params
-    params.require(:admin_user).permit(:first_name, :last_name, :username, :email, :password)
+    params.require(:admin_user).permit(:first_name, :last_name, :username, :email, :password # provide password, not password_digest)
   end
 
 end
