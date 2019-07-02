@@ -2,6 +2,7 @@ class PagesController < ApplicationController
 
   layout 'admin' # replaces application.html.erb
 
+  before_action :confirm_logged_in
   # Instead fo using   @subjects = Subject.sorted   in each of the actions
   # new, create, edit, update, can set before_action. It does, however, create
   # a dateabase call at start of create/update instead of later
