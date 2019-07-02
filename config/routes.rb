@@ -2,6 +2,15 @@ Rails.application.routes.draw do
 
   root 'cms#index'
 
+  # Controller generated for login/password
+  get 'access/menu'
+  get 'access/login'
+  # Added these for login/logout
+  post 'access/attempt_login'
+  get 'access/logout'
+  # create route for 'admin'
+  get 'admin', :to => 'access#menu'
+
   resources :subjects do
     member do
       get :delete # add this if you want to have a delete page
