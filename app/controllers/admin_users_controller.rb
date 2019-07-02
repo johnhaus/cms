@@ -50,7 +50,7 @@ class AdminUsersController < ApplicationController
   private
 
   def admin_user_params
-    params.require(:admin_user).permit(:first_name, :last_name, :username, :email, :password # provide password, not password_digest)
+    params.require(:admin_user).permit(:first_name, :last_name, :username, :email, :password) # provide password, not password_digest
   end
 
 end
