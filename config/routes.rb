@@ -11,6 +11,12 @@ Rails.application.routes.draw do
   # create route for 'admin'
   get 'admin', :to => 'access#menu'
 
+  resources :admin_users, :except => [:show] do
+    member do
+      get :delete
+    end
+  end
+
   resources :subjects do
     member do
       get :delete # add this if you want to have a delete page
