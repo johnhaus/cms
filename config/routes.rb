@@ -2,7 +2,8 @@ Rails.application.routes.draw do
 
   root :to => 'public#index'
 
-  get 'show/:permalink', :to => 'public#show'
+  # Set up rails routes- creates public_show prefix
+  get 'show/:permalink', :to => 'public#show', :as => 'public_show'
 
   # Controller generated for login/password
   get 'access/menu'
