@@ -3,6 +3,10 @@ class PagesController < ApplicationController
   layout 'admin' # replaces application.html.erb
 
   before_action :confirm_logged_in
+
+  # find current subject
+  before_action :find_subject
+
   # Instead fo using   @subjects = Subject.sorted   in each of the actions
   # new, create, edit, update, can set before_action. It does, however, create
   # a dateabase call at start of create/update instead of later
@@ -10,7 +14,8 @@ class PagesController < ApplicationController
   before_action :set_page_count, :only => [:new, :create, :edit, :update]
 
   def index
-    @pages = Page.sorted # will sort by position, can use Page.all as well
+    # @pages = Page.sorted # will sort by position, can use Page.all as well
+    @pages = @subject.pages.sorted
   end
 
   def show
@@ -18,7 +23,7 @@ class PagesController < ApplicationController
   end
 
   def new
-    @page = Page.new
+    @page = Page.new(:subject_id => @subject.id)
     # @page_count = Page.count + 1  used here thru :set_page_count with the += 1
   end
 
@@ -27,7 +32,7 @@ class PagesController < ApplicationController
     @page = Page.new(page_params)
     if @page.save
       flash[:notice] = "Page created successfully"
-      redirect_to(pages_path)
+      redirect_to(pages_path(:subject_id => @subject.id))
     else
       @page_count = Page.count + 1
       render('new')
@@ -43,7 +48,7 @@ class PagesController < ApplicationController
     @page = Page.find(params[:id])
     if @page.update_attributes(page_params)
       flash[:notice] = "Page updated successfully"
-      redirect_to(pages_path(@page))
+      redirect_to(pages_path(@page, :subject_id => @subject.id))
     else
       render('edit')
     end
@@ -57,7 +62,7 @@ class PagesController < ApplicationController
     @page = Page.find(params[:id])
     @page.destroy
     flash[:notice] = "Page deleted successfully"
-    redirect_to(pages_path)
+    redirect_to(pages_path(:subject_id => @subject.id))
   end
 
   private
@@ -75,6 +80,10 @@ class PagesController < ApplicationController
     if params[:action] == 'new' || params[:action] == 'create'
       @page_count += 1
     end
+  end
+
+  def find_subject
+    @subject = Subject.find(params[:subject_id])
   end
 
 end
