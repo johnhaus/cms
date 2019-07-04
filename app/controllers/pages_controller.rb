@@ -10,7 +10,6 @@ class PagesController < ApplicationController
   # Instead fo using   @subjects = Subject.sorted   in each of the actions
   # new, create, edit, update, can set before_action. It does, however, create
   # a dateabase call at start of create/update instead of later
-  before_action :find_subjects, :only => [:new, :create, :edit, :update]
   before_action :set_page_count, :only => [:new, :create, :edit, :update]
 
   def index
@@ -30,6 +29,7 @@ class PagesController < ApplicationController
   def create
     # @subjects = Subject.sorted    is called here with before_action
     @page = Page.new(page_params)
+    @page.subject = @subject
     if @page.save
       flash[:notice] = "Page created successfully"
       redirect_to(pages_path(:subject_id => @subject.id))
@@ -68,11 +68,7 @@ class PagesController < ApplicationController
   private
 
   def page_params
-    params.require(:page).permit(:subject_id, :name, :permalink, :position, :visible)
-  end
-
-  def find_subjects
-    @subjects = Subject.sorted
+    params.require(:page).permit(:name, :permalink, :position, :visible)
   end
 
   def set_page_count
